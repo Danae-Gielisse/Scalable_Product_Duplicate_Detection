@@ -63,3 +63,4 @@ for test_df in test_df_list:
 
 mean_F1 = statistics.mean(F1_values)
 print("The mean of the test F1 score is: " + str(mean_F1))
+
