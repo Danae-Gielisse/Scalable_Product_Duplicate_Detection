@@ -68,7 +68,11 @@ def train_new(train_df):
             results_F1.loc[threshold, b_values[b]] = F1
     return results_LSH, results_F1
 
-def train_multiple_times(number_of_bootstraps, seed):
+def train_multiple_times(number_of_bootstraps, seed, less_cleaning):
+    cleaning_string = ''
+    if less_cleaning:
+        cleaning_string = '_less_cleaning'
+
     random.seed(seed)
     random_seeds = [random.randint(1, 1000) for _ in range(number_of_bootstraps)]
     for i in range(0, number_of_bootstraps):
@@ -80,15 +84,15 @@ def train_multiple_times(number_of_bootstraps, seed):
         test_df_list.append(test_df)
 
         results_LSH, results_F1 = train_new(train_df)
-        results_LSH.to_excel('results_LSH' + string_bootstrap + '.xlsx', index=True)
-        results_F1.to_excel('results_F1' + string_bootstrap + '.xlsx', index=True)
+        results_LSH.to_excel('results_LSH' + string_bootstrap + cleaning_string + '.xlsx', index=True)
+        results_F1.to_excel('results_F1' + string_bootstrap + cleaning_string + '.xlsx', index=True)
 
     return test_df_list
 
 # train multiple times
-test_df_list = train_multiple_times(20, 39)
+test_df_list = train_multiple_times(20, 39, False)
 
 # store the test dataframes for testing
-with open('test_df_list.pkl', 'wb') as file:
+with open('test_df_list_less_cleaning.pkl', 'wb') as file:
     pickle.dump(test_df_list, file)
 
