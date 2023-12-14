@@ -34,7 +34,7 @@ def train_new(train_df):
     # determine the true duplicates
     true_duplicates = find_true_duplicates(model_id_list)
     # determine b and threshold values
-    b_values = [1, 3, 5, 10, 15, 30, 40, 45, 50, 55, 60, 70, 80, 90, 100, 120, 130, 140, 150, 200, 250, 300]
+    b_values = [1, 3, 5, 10, 15, 30, 40, 45, 50, 55, 60, 70, 80, 90, 100, 125, 150, 160, 170, 180, 190,  200, 250, 300]
     threshold_values = [0.1, 0.2, 0.25, 0.26, 0.27, 0.28, 0.29, 0.3, 0.31, 0.32, 0.33, 0.34, 0.35, 0.4, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 1, 1.1, 1.3]
     # create dataframe to store the results for F1 and LSH
     results_F1 = pd.DataFrame(index=threshold_values, columns=b_values)
