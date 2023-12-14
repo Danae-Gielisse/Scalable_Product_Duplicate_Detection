@@ -86,3 +86,25 @@ def pre_process(titles_list):
         processed_titles_list.append(title)
 
     return processed_titles_list
+
+
+def pre_process_less_cleaning(titles_list):
+    processed_titles_list = []
+
+    for title in titles_list:
+        # convert titles to lowercase
+        for word in title:
+            title = title.replace(word, word.lower())
+        # convert all hertz instanced to hz
+        hz_list = ['hertz', 'hz', ' hz', '-hz', ' hertz']
+        for word in hz_list:
+            if word in titles_list:
+                title = title.replace(word, 'hz')
+        # convert all inch instances to inch
+        inch_list = [' inch', 'inches', '-inch', '"', 'inch', ' inches']
+        for word in inch_list:
+            if word in inch_list:
+                title = title.replace(word, 'inch')
+        processed_titles_list.append(title)
+
+    return processed_titles_list
